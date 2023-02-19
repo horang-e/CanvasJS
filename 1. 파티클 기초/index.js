@@ -49,7 +49,7 @@ class Particle {
     ctx.beginPath()
     //각도가 라디안으로 되어있음
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI / 180 * 360)
-    ctx.fillStyle = 'orange'
+    ctx.fillStyle = 'rgb(97, 21, 21)'
     ctx.fill()
     // ctx.stroke()
     //나 길 끝났다
@@ -74,7 +74,7 @@ let particles = []
 for (let i = 0; i < TOTAL; i++) {
   const x = randomNumBtw(0, canvasWidth)
   const y = randomNumBtw(0, canvasHeight)
-  const radius = randomNumBtw(50, 100)
+  const radius = randomNumBtw(20, 70)
   //떨어지는 속도 랜덤
   const vy = randomNumBtw(1, 5)
   const particle = new Particle(x, y, radius, vy)
@@ -108,9 +108,8 @@ function animate() {
     if (particle.y - particle.radius > canvasHeight) {
       //공이 사라지느 시점에 다시 돌아가게
       particle.y = -particle.radius
-
       particle.x = randomNumBtw(0, canvasWidth)
-      particle.radius = randomNumBtw(50, 100)
+      particle.radius = randomNumBtw(20,70)
       particle.vy = randomNumBtw(1, 5)
       //속도 랜덤
     }

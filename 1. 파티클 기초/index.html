@@ -16,18 +16,25 @@
     }
 
     canvas {
-      background-color: white;
+      filter: url('#gooey');
+      /* filter: blur(20px) contrast(20);
+      background-color: white; */
     }
   </style>
 </head>
 
 <body>
-  <canvas>
-
-  </canvas>
-  <script type="module" src="./index.js">
-
-  </script>
+  <canvas></canvas>
+  <svg>
+    <defs>
+      <!-- 필터처리 위치 재사용가능 -->
+      <filter id='gooey'>
+        <feGaussianBlur stdDeviation="40" in="SourceGraphic" result="blur1" />
+        <feColorMatrix in="blur1" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 100 -23"/>
+      </filter>
+    </defs>
+  </svg>
+  <script type="module" src="./index.js"></script>
 </body>
 
 </html>
