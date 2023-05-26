@@ -1,6 +1,11 @@
 // import Particle from './js/Particle.js';
 
 // import {CanvasOption} from './js/CanvasOption';
+// import { randomNumberBetween } from './js/utils.js';
+const randomNumberBetween = (min, max) => {
+  return Math.random() * (max - min) + max;
+};
+
 class CanvasOption {
   constructor() {
     this.canvas = document.querySelector('canvas');
@@ -10,19 +15,21 @@ class CanvasOption {
     this.interval = 1000 / this.fps;
     this.canvasWidth = innerWidth;
     this.canvasHeight = innerHeight;
+    this.bgColor = '#000000';
   }
 }
 
 class Particle extends CanvasOption {
-  constructor() {
+  constructor(x, y) {
     super();
     this.x = x;
     this.y = y;
   }
   update() {
-    this.y += 1;
+    // this.y += 1;
   }
   draw() {
+    this.ctx.fillStyle = '#fff';
     this.ctx.beginPath();
     this.ctx.arc(this.x, this.y, 10, 0, Math.PI * 2);
     this.ctx.fill();
@@ -45,6 +52,7 @@ class Canvas extends CanvasOption {
 
     this.canvas.style.width = this.canvasWidth + 'px';
     this.canvas.style.height = this.canvasHeight + 'px';
+    this.createParticles();
   }
 
   createParticles() {
@@ -66,6 +74,9 @@ class Canvas extends CanvasOption {
       delta = now - then;
       if (delta < this.interval) return;
 
+      this.ctx.fillStyle = this.bgColor;
+      this.ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
+
       // this.ctx.fillRect(100, 100, 200, 200);
 
       this.particles.forEach((particle) => {
@@ -80,7 +91,7 @@ class Canvas extends CanvasOption {
 
 const canvas = new Canvas();
 
-let canvasWidth, canvasHeight;
+// let canvasWidth, canvasHeight;
 
 //animate 함수
 
